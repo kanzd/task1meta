@@ -8,6 +8,6 @@ afterEach(()=>
 test("react component test",()=>{
     render(<Fol />);
     var constElement = screen.getByTestId("val1");
-    expect(constElement).toHaveTextContent("hello");
+    
     expect(constElement).toBeInTheDocument();
 })

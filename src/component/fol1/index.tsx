@@ -4,6 +4,7 @@ import {} from "@mui/icons-material";
 import { DataGrid } from '@mui/x-data-grid';
 import {api_key,API_ID,FULL_API} from "../const";
 import axios from 'axios';
+
 export default function Index(props:any) {
     // var i = props;
     const [state,setState]=useState<any>(null);
@@ -46,7 +47,7 @@ export default function Index(props:any) {
     },[])
     return (
       <>
-     <Grid container justifyContent={"center"} style={{marginTop:"10%"}} >
+     <Grid container justifyContent={"center"} style={{marginTop:"10%"}} data-testid="all">
          <Grid item xs={3}>
          <Typography variant="h3" component="h4" style={{display:"flex",flexDirection:"row",justifyContent:"center"}}>
   NASA API
@@ -71,7 +72,7 @@ export default function Index(props:any) {
                  
                  </div>
             <div style={{display:"flex",flexDirection:"row",justifyContent:"center",marginTop:"2%"}}>
-            <Button variant="contained" onClick={async (e)=>{
+            <Button variant="contained" style={{marginRight:"10%"}} onClick={async (e)=>{
               const data = await axios.get(API_ID(state));
               setState("");
               var res_data=data.data;
@@ -85,6 +86,19 @@ export default function Index(props:any) {
             }])
 
             }}>View</Button>
+            <Button variant="contained" onClick={async (e)=>{
+              const data = await axios.get(API_ID(ids[Math.floor(Math.random() * 10)]));
+              setState("");
+              var res_data=data.data;
+            setRow([{
+              id:res_data.id,
+              neo_reference_id:res_data.neo_reference_id,
+              name:res_data.name,
+              designation:res_data.designation,
+              link:res_data.links.self,
+
+            }])
+            }}>Random</Button>
             </div>
 
 
